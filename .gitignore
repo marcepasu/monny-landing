@@ -1,0 +1,6 @@
+# Referencia local (pesado; no va al deploy de Hostinger)
+manual visual/
+
+.DS_Store
+Thumbs.db
+*.log
