@@ -816,6 +816,15 @@ a:hover {
   filter: saturate(1) contrast(1.02);
 }
 
+.glass-card__visual--trigger {
+  cursor: pointer;
+}
+
+.glass-card__visual--trigger:focus-visible {
+  outline: 2px solid var(--wax-turquoise);
+  outline-offset: 3px;
+}
+
 .glass-card__shine {
   position: absolute;
   inset: 0;
@@ -1073,32 +1082,7 @@ a:hover {
   }
 }
 
-/* ---------- Tarjetas interactivas (historias) ---------- */
-.glass-card--interactive {
-  cursor: pointer;
-}
-
-.glass-card--interactive:focus-visible {
-  outline: 2px solid var(--wax-turquoise);
-  outline-offset: 4px;
-}
-
-.glass-card__hint {
-  margin: 0.65rem 0 0;
-  padding-top: 0.65rem;
-  border-top: 1px solid rgba(107, 203, 184, 0.12);
-  font-family: var(--font-body);
-  font-size: 1.4rem;
-  font-weight: 300;
-  line-height: 1;
-  letter-spacing: 0;
-  text-transform: none;
-  color: rgba(107, 203, 184, 0.6);
-}
-
-.glass-card--interactive:hover .glass-card__hint {
-  color: var(--wax-turquoise);
-}
+/* ---------- Tarjetas interactivas (historias; clic en imagen) ---------- */
 
 /* ---------- Modal de historia (dialog nativo) ---------- */
 /* Importante: sin [open], el dialog debe estar oculto. display:flex global rompe el cierre nativo. */
@@ -1247,13 +1231,13 @@ a:hover {
 }
 
 .story-dialog__body {
-  font-size: 0.98rem;
-  line-height: 1.65;
-  color: rgba(255, 255, 255, 0.82);
+  font-size: 1rem;
+  line-height: 1.72;
+  color: rgba(255, 255, 255, 0.84);
 }
 
 .story-dialog__body p {
-  margin: 0 0 1rem;
+  margin: 0 0 1.05rem;
 }
 
 .story-dialog__body p:last-child {

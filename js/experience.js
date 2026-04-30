@@ -102,6 +102,7 @@
     var dlgQuote = storyDialog.querySelector('.story-dialog__quote');
     var dlgBody = storyDialog.querySelector('.story-dialog__body');
     var lastCard = null;
+    var lastTrigger = null;
 
     function populateFromCard(card) {
       var imgEl = card.querySelector('.glass-card__visual img');
@@ -131,8 +132,9 @@
 
     function openStory(card) {
       lastCard = card;
+      lastTrigger = card.querySelector('.glass-card__visual--trigger');
       populateFromCard(card);
-      card.setAttribute('aria-expanded', 'true');
+      if (lastTrigger) lastTrigger.setAttribute('aria-expanded', 'true');
       storyDialog.showModal();
       if (closeBtn) closeBtn.focus();
     }
@@ -142,10 +144,13 @@
     }
 
     storyCards.forEach(function (card) {
-      card.addEventListener('click', function () {
+      var trigger = card.querySelector('.glass-card__visual--trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', function (e) {
+        e.stopPropagation();
         openStory(card);
       });
-      card.addEventListener('keydown', function (e) {
+      trigger.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           openStory(card);
@@ -173,17 +178,19 @@
 
     storyDialog.addEventListener('close', function () {
       storyCards.forEach(function (c) {
-        c.setAttribute('aria-expanded', 'false');
+        var t = c.querySelector('.glass-card__visual--trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
       });
       if (dlgImg) {
         dlgImg.removeAttribute('src');
         dlgImg.setAttribute('hidden', '');
       }
       if (dlgMedia) dlgMedia.classList.remove('story-dialog__media--empty');
-      if (lastCard && document.contains(lastCard)) {
-        lastCard.focus();
+      if (lastTrigger && document.contains(lastTrigger)) {
+        lastTrigger.focus();
       }
       lastCard = null;
+      lastTrigger = null;
     });
   }
 
