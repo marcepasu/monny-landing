@@ -38,7 +38,20 @@
             fetchpriority="high"
           />
         </a>
-        <nav class="nav" id="site-nav" aria-label="Capitulos">
+        <button
+          type="button"
+          class="nav-compress__toggle"
+          id="nav-compress-toggle"
+          aria-expanded="false"
+          aria-controls="moony-nav-panel"
+          aria-label="Abrir men&uacute; de navegaci&oacute;n"
+        >
+          <span class="nav-compress__icon" aria-hidden="true">
+            <span class="nav-compress__line"></span>
+            <span class="nav-compress__line"></span>
+          </span>
+        </button>
+        <nav class="nav nav--desktop" id="site-nav" aria-label="Cap&iacute;tulos">
           <a href="#inicio" data-nav="inicio">Inicio</a>
           <a href="#origen" data-nav="origen">Origen</a>
           <a href="#latidos" data-nav="latidos">Latidos</a>
@@ -47,6 +60,27 @@
           <a href="#eco" data-nav="eco">Eco</a>
           <a href="#contacto" data-nav="contacto">Cierre</a>
         </nav>
+      </div>
+      <div
+        class="nav-panel"
+        id="moony-nav-panel"
+        role="dialog"
+        aria-modal="true"
+        aria-hidden="true"
+        aria-label="Navegaci&oacute;n del sitio"
+      >
+        <div class="nav-panel__scrim" data-close-nav tabindex="-1"></div>
+        <div class="nav-panel__sheet">
+          <nav class="nav-panel__links" aria-label="Cap&iacute;tulos">
+            <a href="#inicio" data-nav="inicio">Inicio</a>
+            <a href="#origen" data-nav="origen">Origen</a>
+            <a href="#latidos" data-nav="latidos">Latidos</a>
+            <a href="#claridad" data-nav="claridad">Claridad</a>
+            <a href="#hogar" data-nav="hogar">Hogar</a>
+            <a href="#eco" data-nav="eco">Eco</a>
+            <a href="#contacto" data-nav="contacto">Cierre</a>
+          </nav>
+        </div>
       </div>
     </header>
 
