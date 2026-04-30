@@ -269,6 +269,8 @@
     } else if (mqWide.addListener) {
       mqWide.addListener(onBreakpoint);
     }
+
+    onBreakpoint();
   })();
 
   /* Navegacion activa por capitulo */

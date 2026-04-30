@@ -163,15 +163,17 @@ a:hover {
 
 .site-header__inner {
   display: flex;
+  flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
+  gap: 0.75rem 1rem;
   min-height: calc(4.35rem + env(safe-area-inset-top, 0px));
   padding-top: env(safe-area-inset-top, 0px);
-  gap: 1rem;
 }
 
 .brand {
   display: inline-flex;
+  flex-shrink: 0;
   align-items: center;
   padding: var(--logo-safe-o);
   margin: calc(var(--logo-safe-o) * -1);
@@ -193,12 +195,34 @@ a:hover {
 
 .nav {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  align-items: center;
   gap: 0.25rem 1.15rem;
   font-size: 0.82rem;
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+}
+
+/* Una sola fila en escritorio: si no cabe, scroll horizontal (evita “segundo menú” bajo el logo) */
+.nav--desktop {
+  flex: 1 1 auto;
+  justify-content: flex-end;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.nav--desktop::-webkit-scrollbar {
+  display: none;
+}
+
+.nav--desktop a {
+  flex-shrink: 0;
 }
 
 .nav a {
@@ -229,6 +253,7 @@ a:hover {
 /* Botón menú comprimido (estilo compacto tipo Apple; solo móvil/tablet) */
 .nav-compress__toggle {
   display: none;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
   margin: 0;
@@ -306,6 +331,13 @@ a:hover {
   pointer-events: auto;
   visibility: visible;
   opacity: 1;
+}
+
+/* Escritorio: el panel móvil no existe en el flujo (evita texto duplicado o superpuesto) */
+@media (min-width: 901px) {
+  .nav-panel {
+    display: none !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -409,6 +441,16 @@ a:hover {
 
   .nav-compress__toggle {
     display: inline-flex;
+  }
+
+  .nav-panel {
+    display: flex !important;
+  }
+
+  .nav-panel__sheet {
+    width: min(calc(100vw - 1.25rem), 26rem);
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
