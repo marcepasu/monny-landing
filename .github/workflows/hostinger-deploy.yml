@@ -1,0 +1,26 @@
+# Tras cada push a main, avisa a Hostinger para que ejecute "Implementar".
+# Configuración en GitHub del repo: Settings → Secrets and variables → Actions → New repository secret
+#   Name:  HOSTINGER_WEBHOOK_URL
+#   Value: la URL completa que copias del modal "Implementación automática" en hPanel.
+#
+# Sin ese secreto, el workflow falla a propósito para que no despliegues por error.
+
+name: Desplegar en Hostinger (webhook)
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  notify-hostinger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Llamar al webhook de Hostinger
+        env:
+          URL: ${{ secrets.HOSTINGER_WEBHOOK_URL }}
+        run: |
+          if [ -z "$URL" ]; then
+            echo "::error::Falta el secreto HOSTINGER_WEBHOOK_URL en el repositorio (Settings → Secrets → Actions)."
+            exit 1
+          fi
+          curl -fsS -X POST "$URL" -H "Accept: application/json"
